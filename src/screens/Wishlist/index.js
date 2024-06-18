@@ -116,6 +116,7 @@ const WishlistHandle = () => {
     const [loading, setLoading] = useState(true);
     const wishlist = useSelector((state) => state.wishlist);
     const dispatch = useDispatch();
+    const [fetchWishlist, setFetchWishlist] = useState(null);
 
     // useEffect(() => {
     //     const fetchInitialData = async () => {
@@ -146,7 +147,8 @@ const WishlistHandle = () => {
                     id: doc.id,
                     ...doc.data(),
                 }));
-                dispatch(setWishlist(fetchedWishlist)); 
+                // dispatch(setWishlist(fetchedWishlist)); 
+                dispatch({ type: 'SET_WISHLIST', payload: fetchedWishlist });
                 setLoading(false);
             } catch (error) {
                 console.warn('Error fetching wishlist: ', error);
@@ -155,7 +157,12 @@ const WishlistHandle = () => {
         };
 
         fetchInitialData();
-    }, [dispatch]);
+
+        const interval = setInterval(fetchInitialData, 1000); 
+
+        return () => clearInterval(interval);
+        
+    }, []); 
 
     // const handleRemoveFromWishlist = async (item) => {
     //     if (!item.id) {
