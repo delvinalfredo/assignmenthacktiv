@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WishlistHandle from '../screens/Wishlist/';
 import Home from '../screens/Home';
-// import { WishlistProvider } from '../screens/Provider';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
